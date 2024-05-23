@@ -44,12 +44,12 @@ function displayReleaseInfo(release) {
   contentElement.innerHTML = `更新内容: ${release.body}`;
   
   // 获取并显示所有APK下载链接
-  const apkLinks = release.assets
-    .filter(asset => asset.name.endsWith('.apk'))
-    .map(asset => `<a href="${asset.browser_download_url}">${asset.name}</a>`)
-    .join('<br>');
+const apkLinks = release.assets
+  .filter(asset => asset.name.endsWith('.apk'))
+  .map(asset => `<a href="${asset.browser_download_url}">${asset.browser_download_url}</a>`)
+  .join('<br>');
 
-  downloadElement.innerHTML = `下载地址:<br>${apkLinks}`;
+downloadElement.innerHTML = `下载地址:<br>${apkLinks}`;
 }
 
 // 当页面加载完成时，调用 fetchLatestReleaseInfo 函数
