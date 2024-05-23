@@ -18,8 +18,12 @@
 	</script>        
 </head>
 <body>
-	<p>1.Dev Home：</p>
+	<p>⭐查询全部软件包名⭐</p>
+	<p>Get-AppxPackage -All | Select-Object Name, PackageFullName</p>
+	<p>⭐1.Dev Home：</p>
 	<p>Get-AppxPackage Windows.DevHome | Remove-AppxPackage</p>
+	<p>Get-AppxPackage Microsoft.Windows.DevHome | Remove-AppxPackage</p>
+	<p>⭐DevHome包名系统版本原因会不同，需自行测试</p>
 	<p>2.Game Bar：</p>
 	<p>Get-AppxPackage Microsoft.XboxGamingOverlay | Remove-AppxPackage</p>
 	<p>3.Phone Link：</p>
