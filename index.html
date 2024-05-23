@@ -29,11 +29,12 @@
                         fetch(`https://api.github.com/repos/${user}/${repo}/commits?path=html/${file.name}&page=1&per_page=1`)
                             .then(response => response.json())
                             .then(commits => {
-                                const lastModified = commits[0].commit.committer.date;
+                                const lastModified = new Date(commits[0].commit.committer.date);
+                                const lastModifiedInCST = lastModified.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
 
-                                // 创建链接，指向html文件夹下的文件，并显示最后修改时间
+                                // 创建链接，指向html文件夹下的文件，并显示最后修改时间（中国标准时间）
                                 const listItem = document.createElement('div');
-                                listItem.innerHTML = `<a href="/html/${file.name}">${fileNameWithoutExtension}</a> 最后修改时间: ${lastModified}`;
+                                listItem.innerHTML = `<a href="/html/${file.name}">${fileNameWithoutExtension}</a> 最后修改时间: ${lastModifiedInCST}`;
                                 list.appendChild(listItem);
                             })
                             .catch(error => console.error('Error:', error));
