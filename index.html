@@ -1,11 +1,15 @@
+<link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>仓库文件列表</title>
+    <title>首页 - 艾曲君の文件仓库</title>
 </head>
 <body>
-    <div id="file-list"></div>
+  <p>❤仓库列表❤</p>  
+  <div id="file-list"></div>
     <script>
         // GitHub 用户名和仓库名
         const user = 'aiqujun';
@@ -34,7 +38,7 @@
 
                                 // 创建链接，指向html文件夹下的文件，并显示最后修改时间（中国标准时间）
                                 const listItem = document.createElement('div');
-                                listItem.innerHTML = `<a href="/html/${file.name}">${fileNameWithoutExtension}</a> 最后修改时间: ${lastModifiedInCST}`;
+                                listItem.innerHTML = `<a href="/html/${file.name}">${fileNameWithoutExtension}</a> 更新时间: ${lastModifiedInCST}`;
                                 list.appendChild(listItem);
                             })
                             .catch(error => console.error('Error:', error));
