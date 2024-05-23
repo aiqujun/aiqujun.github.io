@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>仓库文件列表</title>
+</head>
+<body>
+    <div id="file-list"></div>
+    <script>
+        // GitHub 用户名和仓库名
+        const user = 'aiqujun';
+        const repo = '2';
+
+        // 构建GitHub API URL
+        const apiURL = `https://api.github.com/repos/${user}/${repo}/contents/`;
+
+        // 获取文件列表并显示
+        fetch(apiURL)
+            .then(response => response.json())
+            .then(files => {
+                const list = document.getElementById('file-list');
+                files.forEach(file => {
+                    // 只处理.html文件，并排除index.html
+                    if(file.name.endsWith('.html') && file.name !== 'index.html') {
+                        // 去除文件名中的.html扩展名
+                        const fileNameWithoutExtension = file.name.replace('.html', '');
+
+                        // 创建链接，直接指向根目录下的文件
+                        const listItem = document.createElement('div');
+                        listItem.innerHTML = `<a href="/${file.name}">${fileNameWithoutExtension}</a>`;
+                        list.appendChild(listItem);
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

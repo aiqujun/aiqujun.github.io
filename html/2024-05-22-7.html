@@ -1,0 +1,63 @@
+---
+title: BBLL，bilibili最好用的第三方TV应用！
+tags: Tv
+---
+
+## 软件介绍：
+BBLL，目前最好用的B站第三方应用，功能强大，支持看直播，订阅，看1080P视频等。。。
+## 下载信息：
+<script>
+// JavaScript代码
+async function fetchGitHubReleaseInfo(repo) {
+  try {
+    // 使用fetch API获取GitHub仓库的最新发布信息
+    const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
+    const releaseInfo = await response.json();
+
+    // 解析所需的数据
+    const version = releaseInfo.tag_name;
+    const updateDate = new Date(releaseInfo.published_at).toLocaleDateString('zh-CN');
+    const updateContent = releaseInfo.body;
+    
+    // 获取所有APK下载链接
+    const apkDownloadUrls = releaseInfo.assets
+      .filter(asset => asset.name.endsWith('.apk'))
+      .map(asset => asset.browser_download_url);
+
+    // 在控制台中打印获取到的信息
+    console.log(`版本号: ${version}`);
+    console.log(`更新日期: ${updateDate}`);
+    console.log(`更新内容: ${updateContent}`);
+    apkDownloadUrls.forEach(url => console.log(`下载地址: ${url}`));
+
+    // 将信息显示在HTML页面上
+    document.getElementById('version').textContent = version;
+    document.getElementById('update-date').textContent = updateDate;
+    document.getElementById('update-content').textContent = updateContent;
+    
+    // 清除旧的下载链接列表
+    const downloadLinksContainer = document.getElementById('download-links');
+    downloadLinksContainer.innerHTML = '';
+
+    // 添加新的下载链接到页面
+    apkDownloadUrls.forEach(url => {
+      const a = document.createElement('a');
+      a.href = url;
+      a.textContent = url; // 直接显示链接地址
+      a.style.display = 'block'; // 每个链接独占一行
+      downloadLinksContainer.appendChild(a);
+    });
+  } catch (error) {
+    console.error('获取GitHub版本信息失败:', error);
+  }
+}
+
+// 调用函数，替换'xiaye13579/BBLL'为您的GitHub用户名和仓库名
+fetchGitHubReleaseInfo('xiaye13579/BBLL');
+</script>
+<div>
+  <p>版本号: <span id="version"></span></p>
+  <p>更新日期: <span id="update-date"></span></p>
+  <p>更新内容: <span id="update-content"></span></p>
+  <p>下载地址: <span id="download-links"></span></p>
+</div>
