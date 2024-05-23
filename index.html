@@ -25,9 +25,9 @@
                         // 去除文件名中的.html扩展名
                         const fileNameWithoutExtension = file.name.replace('.html', '');
 
-                        // 创建链接，直接指向根目录下的文件
+                        // 创建链接，指向/html目录下的文件
                         const listItem = document.createElement('div');
-                        listItem.innerHTML = `<a href="/${file.name}">${fileNameWithoutExtension}</a>`;
+                        listItem.innerHTML = `<a href="/html/${fileNameWithoutExtension}">${fileNameWithoutExtension}</a>`;
                         list.appendChild(listItem);
                     }
                 });
