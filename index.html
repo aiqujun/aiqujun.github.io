@@ -1,51 +1,11 @@
-<link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>首页 - 艾曲君の文件仓库</title>
+    <script type="text/javascript">
+        window.location.href = "http://aqj.cloudns.be/";
+    </script>
 </head>
 <body>
-  <p>❤仓库列表❤</p>  
-  <div id="file-list"></div>
-    <script>
-        // GitHub 用户名和仓库名
-        const user = 'aiqujun';
-        const repo = 'aiqujun.github.io';
-
-        // 构建GitHub API URL，指向html文件夹
-        const apiURL = `https://api.github.com/repos/${user}/${repo}/contents/html`;
-
-        // 获取html文件夹内的文件列表并显示
-        fetch(apiURL)
-            .then(response => response.json())
-            .then(files => {
-                const list = document.getElementById('file-list');
-                files.forEach(file => {
-                    // 只处理.html文件，并排除index.html
-                    if(file.name.endsWith('.html') && file.name !== 'index.html') {
-                        // 去除文件名中的.html扩展名
-                        const fileNameWithoutExtension = file.name.replace('.html', '');
-
-                        // 获取文件的最后修改时间
-                        fetch(`https://api.github.com/repos/${user}/${repo}/commits?path=html/${file.name}&page=1&per_page=1`)
-                            .then(response => response.json())
-                            .then(commits => {
-                                const lastModified = new Date(commits[0].commit.committer.date);
-                                const lastModifiedInCST = lastModified.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
-
-                                // 创建链接，指向html文件夹下的文件，并显示最后修改时间（中国标准时间）
-                                const listItem = document.createElement('div');
-                                listItem.innerHTML = `<a href="/html/${file.name}">${fileNameWithoutExtension}</a> 更新时间: ${lastModifiedInCST}`;
-                                list.appendChild(listItem);
-                            })
-                            .catch(error => console.error('Error:', error));
-                    }
-                });
-            })
-            .catch(error => console.error('Error:', error));
-    </script>
 </body>
 </html>
